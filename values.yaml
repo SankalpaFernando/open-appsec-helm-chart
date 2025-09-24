@@ -1284,29 +1284,17 @@ appsec:
   learning:
     name: learning
     replicas: 1
-    image:
-      registry: ghcr.io/openappsec
-      image: smartsync
-      tag: latest
     nodeSelector: {}
     tolerations: []
 
   storage:
     name: shared-storage
     replicas: 1
-    image:
-      registry: ghcr.io/openappsec
-      image: smartsync-shared-files
-      tag: latest
     nodeSelector: {}
     tolerations: []
 
   tuning:
     name: tuning
-    image:
-      registry: ghcr.io/openappsec
-      image: smartsync-tuning
-      tag: latest
     enabled: false
     replicaCount: 1
     securityContext:
