@@ -1281,6 +1281,48 @@ appsec:
 
   prometheusPort: 7465
 
+  learning:
+    name: learning
+    replicas: 1
+    image:
+      registry: ghcr.io/openappsec
+      image: smartsync
+      tag: latest
+    nodeSelector: {}
+    tolerations: []
+
+  storage:
+    name: shared-storage
+    replicas: 1
+    image:
+      registry: ghcr.io/openappsec
+      image: smartsync-shared-files
+      tag: latest
+    nodeSelector: {}
+    tolerations: []
+
+  tuning:
+    name: tuning
+    image:
+      registry: ghcr.io/openappsec
+      image: smartsync-tuning
+      tag: latest
+    enabled: false
+    replicaCount: 1
+    securityContext:
+        fsGroup: 2000
+        runAsGroup: 2000
+        runAsUser: 1000
+    port: 80
+    failureThreshold: 3
+    initialDelaySeconds: 5
+    periodSeconds: 5
+    timeoutSeconds: 10
+    successThreshold: 1
+    serviceAccount:
+      create: true
+      name: tuning-svc-account
+
 # -- For nginx vanilla installation use kind Vanilla (no appsec components).
 # -- For nginx with appsec installation use kind AppSec (default: nginx + appsec without state).
 # -- For nginx with appsec (statefulset) installation use kind AppSecStateful.
